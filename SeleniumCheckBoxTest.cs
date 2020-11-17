@@ -36,7 +36,7 @@ namespace ClassLibrary1.Test
         public static void TestIfFirstSelected()
         {
             page.CheckFirstBox()
-                .CheckIfFirstSelected("Success - Check box is checked");
+                .AssertIfFirstSelected("Success - Check box is checked");
         }
 
         [Test]

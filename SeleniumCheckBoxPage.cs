@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ClassLibrary1.Page
@@ -26,12 +27,14 @@ namespace ClassLibrary1.Page
             firstcheckbox.Click();
             return this;
         }
+        public SeleniumCheckBoxPage AssertIfFirstSelected(string buttonText)
+        {
+            Assert.IsTrue(text.Text.Equals(buttonText));
+            return this;
+        }
         public SeleniumCheckBoxPage CheckMultipleBoxes()
         {
-            if (firstcheckbox.Selected)
-            {
-                firstcheckbox.Click();
-            }
+            IfFirstCheckboxSelected();
             foreach (IWebElement element in multipleCheckboxList)
             {
                 element.Click();
@@ -58,10 +61,16 @@ namespace ClassLibrary1.Page
             }
             return this;
         }
+        private void IfFirstCheckboxSelected()
+        {
+            if (firstcheckbox.Selected)
+            {
+                firstcheckbox.Click();
+            }
+        }
         private void Wait()
         {
-
-            WebDriverWait wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(20));
-        }  
+            Thread.Sleep(100);
+        }
     }
 }
